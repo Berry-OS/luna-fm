@@ -1,70 +1,96 @@
-# Luna Files
+**🌙 Luna Files**
 
-`luna-ui.h` を使用した、PCManFM風の操作性とmacOS風の外観を持つLinux向けファイルマネージャです。
+A lightweight Linux file manager built with the single-header **Luna UI** engine. Luna Files combines familiar PCManFM-style workflows with a polished macOS-inspired interface, smooth grid and list views, and a CSS-driven appearance.
 
-## 主な機能
+[![Sponsor](https://img.shields.io/badge/Sponsor%20this%20project-%E2%9D%A4%EF%B8%8F-white?logo=githubsponsors&logoColor=EA4AAA&labelColor=EA4AAA)](https://github.com/sponsors/yui0)
 
-- サイドバー: ホーム、デスクトップ、書類、ダウンロード、画像、音楽、動画、ごみ箱、ルート
-- 戻る／進む／上へ／再読込、場所バー、フォルダー内検索
-- アイコン表示／リスト表示、隠しファイル切替、名前・日時・サイズ順の切替
-- 単一・Ctrl複数・Shift範囲選択、ダブルクリックで開く、右クリックメニュー
-- 新規フォルダー、名前変更、情報表示、ごみ箱への移動
-- Ctrl+C / Ctrl+X / Ctrl+V のファイルクリップボード
-- Wayland `wl-copy` / `wl-paste`、X11 `xclip` の `x-special/gnome-copied-files` に任意対応
-- `wl-copy` / `xclip` がない場合も、アプリ内クリップボードとGLFWテキストクリップボードで動作
+![Luna Files grid view](docs/screenshots/luna-files-overview.jpg)
+![Luna Files list view](docs/screenshots/luna-files-documents.jpg)
+![Luna Files dark appearance settings](docs/screenshots/luna-files-settings-dark.jpg)
 
-## 必要ファイル
+---
 
-このフォルダーへ、Luna UIが元から使用している次のヘッダーを置いてください。
+## ✨ Highlights
 
-- `stb_truetype.h`
-- `stb_image.h`
-- `stb_image_write.h`
-- `cssparser.h`
+- Familiar sidebar shortcuts for Home, Desktop, Documents, Downloads, Pictures, Music, Videos, Trash, and the filesystem root
+- Back, forward, up, reload, location entry, and live folder search
+- Responsive icon and list views with hidden-file toggling and name, date, or size sorting
+- Single, `Ctrl` multi-selection, and `Shift` range selection
+- Double-click or `Enter` to open files and folders, plus a right-click context menu
+- New-folder, rename, properties, Trash, and permanent-delete workflows
+- File clipboard with `Ctrl+C`, `Ctrl+X`, and `Ctrl+V`
+- Light and dark themes, accent colors, font controls, display density, and animation settings
+- Optional Wayland and X11 clipboard interoperability
 
-`luna-ui.h` は同梱済みで、ホスト側ショートカットのため `luna_focused_element()` と `luna_focus_element()` を追加しています。
+## 🛠️ Build
 
-## ビルド
+### Debian / Ubuntu
 
-Debian/Ubuntu系の例:
-
-```sh
+```bash
 sudo apt install build-essential pkg-config libglfw3-dev libgl1-mesa-dev
 make
 ```
 
-起動:
+The project includes `luna-ui.h`. Keep the following supporting single-header libraries in the same directory:
 
-```sh
-./luna-fm
-./luna-fm /開きたい/フォルダー
+```text
+stb_truetype.h
+stb_image.h
+stb_image_write.h
+cssparser.h
 ```
 
-Waylandで他のファイルマネージャとのコピー＆貼り付けを強化する場合:
+## 🚀 Run
 
-```sh
+Open the home directory:
+
+```bash
+./luna-fm
+```
+
+Open a specific folder:
+
+```bash
+./luna-fm /path/to/folder
+```
+
+For richer file clipboard integration on Wayland:
+
+```bash
 sudo apt install wl-clipboard
 ```
 
-X11の場合:
+For X11:
 
-```sh
+```bash
 sudo apt install xclip
 ```
 
-## 操作
+Luna Files still provides its internal clipboard and GLFW text clipboard when these optional tools are unavailable.
 
-- `Enter`: 開く
-- `Backspace`: 戻る
-- `F2`: 名前変更
-- `Delete`: ごみ箱へ移動
-- `Ctrl+A`: すべて選択
-- `Ctrl+C`: コピー
-- `Ctrl+X`: 切り取り
-- `Ctrl+V`: 貼り付け
-- `Ctrl+L`: 場所バー
-- `Esc`: メニュー／ダイアログを閉じる
+## ⌨️ Keyboard Shortcuts
 
-## 実装上の方針
+| Shortcut | Action |
+|---|---|
+| `Enter` | Open the selected item |
+| `Backspace` | Go back |
+| `F2` | Rename |
+| `Delete` | Move to Trash |
+| `Ctrl+A` | Select all |
+| `Ctrl+C` | Copy |
+| `Ctrl+X` | Cut |
+| `Ctrl+V` | Paste |
+| `Ctrl+L` | Focus the location bar |
+| `Esc` | Close the active menu or dialog |
 
-Luna UIのDOMをフォルダー移動ごとに再解析せず、384個の表示スロットを最初に作成し、`luna_set_text()` とクラス更新だけで差し替えています。これにより、一覧更新・検索・表示切替で不要なHTML再解析を避けています。
+## 🎨 Luna UI
+
+The interface is rendered by `luna-ui.h`, a single-header HTML/CSS-to-OpenGL engine. Layout, controls, shadows, rounded surfaces, themes, and interaction states are CSS-driven rather than drawn as a traditional immediate-mode interface.
+
+## ⚡ Implementation Notes
+
+Luna Files creates 384 reusable display slots at startup. Folder navigation, searching, sorting, and view changes update slot text and classes with `luna_set_text()` instead of reparsing the complete HTML document. This keeps routine directory refreshes lightweight while retaining a fully styled UI.
+
+## 📄 License
+
+Luna Files and Luna UI are distributed under the Mozilla Public License 2.0.

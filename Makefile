@@ -6,7 +6,7 @@ LIBS ?= $(PKG_LIBS) -lGL -ldl -lm -lpthread
 
 all: luna-fm
 
-luna-fm: luna-fm.c luna-ui.h stb_truetype.h stb_image.h stb_image_write.h cssparser.h
+luna-fm: luna-fm.c luna-ui/luna-ui.h luna-ui/stb_truetype.h luna-ui/stb_image.h luna-ui/stb_image_write.h luna-ui/cssparser.h
 	$(CC) $(CFLAGS) $(PKG_CFLAGS) -o $@ luna-fm.c $(LIBS)
 
 clean:

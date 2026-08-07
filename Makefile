@@ -1,5 +1,5 @@
 CC ?= cc
-CFLAGS ?= -O2 -pipe -std=c11 -Wall -Wextra
+CFLAGS ?= -O2 -pipe -std=c11 -Wall -Wextra -Iluna-ui
 PKG_CFLAGS := $(shell pkg-config --cflags glfw3 2>/dev/null)
 PKG_LIBS := $(shell pkg-config --libs glfw3 2>/dev/null)
 LIBS ?= $(PKG_LIBS) -lGL -ldl -lm -lpthread

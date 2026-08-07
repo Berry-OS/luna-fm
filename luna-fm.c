@@ -1,16 +1,12 @@
-/*
- * luna-fm — thin launcher for the reusable Luna standard file dialog.
- *
- * Copyright © 2026 Yuichiro Nakada / Project Vespera — MPL 2.0
- */
+/* luna-fm — thin launcher for the reusable Luna standard file dialog. */
 #define _GNU_SOURCE
-#define LUNA_UI_MAX_ELEMENTS 1800
+#define LUNA_UI_MAX_ELEMENTS 2048
 #define LUNA_UI_MAX_RULES 900
 #define LUNA_UI_IMPLEMENTATION
-#include "luna-ui/luna-ui.h"
+#include "luna-ui.h"
 #define LUNA_WINDOW_IMPLEMENTATION
 #define LUNA_WINDOW_FILE_DIALOG_IMPLEMENTATION
-#include "luna-ui/luna-window.h"
+#include "luna-window.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -31,6 +27,8 @@ int main(int argc, char** argv) {
         else if (!strcmp(argv[i], "--save")) config.mode = LUNA_FILE_DIALOG_SAVE_FILE;
         else if (!strcmp(argv[i], "--client-chrome")) config.client_chrome = 1;
         else if (!strcmp(argv[i], "--name") && i + 1 < argc) config.suggested_name = argv[++i];
+        else if (!strcmp(argv[i], "--filter-name") && i + 1 < argc) config.filter_name = argv[++i];
+        else if (!strcmp(argv[i], "--filter") && i + 1 < argc) config.filter_patterns = argv[++i];
         else config.initial_path = argv[i];
     }
 

@@ -4,9 +4,21 @@ A lightweight Linux file manager built with the single-header **Luna UI** engine
 
 [![Sponsor](https://img.shields.io/badge/Sponsor%20this%20project-%E2%9D%A4%EF%B8%8F-white?logo=githubsponsors&logoColor=EA4AAA&labelColor=EA4AAA)](https://github.com/sponsors/yui0)
 
-![Luna Files grid view](docs/screenshots/luna-files-overview.jpg)
-![Luna Files list view](docs/screenshots/luna-files-documents.jpg)
-![Luna Files dark appearance settings](docs/screenshots/luna-files-settings-dark.jpg)
+## 📸 Screenshots
+
+### Home — icon view
+
+![Luna Files home icon view](docs/screenshots/luna-files-home.webp)
+
+### Documents — list view
+
+![Luna Files documents list view](docs/screenshots/luna-files-documents-list.webp)
+
+### Appearance settings — dark theme
+
+![Luna Files dark appearance settings](docs/screenshots/luna-files-dark-settings.webp)
+
+These are direct renders of the application. For screenshot-only Linux environments without GLFW development headers, `tools/screenshot-glfw` provides a minimal offscreen GLFW-compatible capture host; regular builds still use GLFW normally.
 
 ---
 
